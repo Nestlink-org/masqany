@@ -62,13 +62,13 @@ export default function VehicleListScreen() {
     }
 
     // Vehicle type filter
-    if (vehicleTypeFilter && vehicleTypeFilter !== "all") {
+    if (vehicleTypeFilter) {
       if (vehicle.vehicleType !== vehicleTypeFilter) return false;
     }
 
     // Status filter
-    if (statusFilter && statusFilter !== "all") {
-      if (vehicle.verificationStatus !== statusFilter) return false;
+    if (statusFilter) {
+      if (vehicle.status !== statusFilter) return false;
     }
 
     return true;
@@ -134,14 +134,14 @@ export default function VehicleListScreen() {
             contentContainerStyle={{ gap: 8 }}
           >
             {[
-              { value: "all", label: "All" },
-              { value: "pickup", label: "Pickup" },
-              { value: "truck", label: "Truck" },
-              { value: "mini_truck", label: "Mini Truck" },
+              { value: null, label: "All" },
+              { value: "pickup" as VehicleType, label: "Pickup" },
+              { value: "truck" as VehicleType, label: "Truck" },
+              { value: "mini_truck" as VehicleType, label: "Mini Truck" },
             ].map((filter) => (
               <TouchableOpacity
-                key={filter.value}
-                onPress={() => setVehicleTypeFilter(filter.value as VehicleType | "all")}
+                key={filter.label}
+                onPress={() => setVehicleTypeFilter(filter.value)}
                 className={`px-4 py-2 rounded-full ${
                   vehicleTypeFilter === filter.value
                     ? "bg-primary-700"
@@ -168,14 +168,14 @@ export default function VehicleListScreen() {
             contentContainerStyle={{ gap: 8 }}
           >
             {[
-              { value: "all", label: "All Status" },
-              { value: "verified", label: "Verified" },
-              { value: "pending_verification", label: "Pending" },
-              { value: "rejected", label: "Rejected" },
+              { value: null, label: "All Status" },
+              { value: "available" as VehicleStatus, label: "Available" },
+              { value: "unavailable" as VehicleStatus, label: "Unavailable" },
+              { value: "under_maintenance" as VehicleStatus, label: "Maintenance" },
             ].map((filter) => (
               <TouchableOpacity
-                key={filter.value}
-                onPress={() => setStatusFilter(filter.value as VehicleStatus | "all")}
+                key={filter.label}
+                onPress={() => setStatusFilter(filter.value)}
                 className={`px-4 py-2 rounded-full border ${
                   statusFilter === filter.value
                     ? "border-primary-700 bg-primary-50"
@@ -232,16 +232,16 @@ export default function VehicleListScreen() {
             <View className="flex-1 items-center justify-center px-8 py-12">
               <Ionicons name="car-outline" size={64} color="#BDBDC0" />
               <Text className="font-poppins-semibold text-[18px] text-dark-400 mt-4 text-center">
-                {searchQuery || vehicleTypeFilter !== "all" || statusFilter !== "all"
+                {searchQuery || vehicleTypeFilter !== null || statusFilter !== null
                   ? "No vehicles found"
                   : "Register your first vehicle"}
               </Text>
               <Text className="font-inter text-[14px] text-dark-100 mt-2 text-center">
-                {searchQuery || vehicleTypeFilter !== "all" || statusFilter !== "all"
+                {searchQuery || vehicleTypeFilter !== null || statusFilter !== null
                   ? "Try adjusting your filters"
                   : "Start earning by registering your vehicle for relocation services"}
               </Text>
-              {!searchQuery && vehicleTypeFilter === "all" && statusFilter === "all" && (
+              {!searchQuery && vehicleTypeFilter === null && statusFilter === null && (
                 <TouchableOpacity
                   onPress={handleAddVehicle}
                   className="bg-primary-700 rounded-full px-6 py-3 mt-6"

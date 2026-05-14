@@ -50,7 +50,7 @@ export function VideoFeedList({
   onLocationPress,
   onSearchPress,
 }: VideoFeedListProps) {
-  const flashListRef = useRef<FlashList<PropertyVideo>>(null);
+  const flashListRef = useRef<FlashListRef<PropertyVideo>>(null);
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('down');
   const lastScrollY = useRef(0);
   
@@ -202,7 +202,6 @@ export function VideoFeedList({
       scrollEventThrottle={16}
       onEndReached={hasMore ? onEndReached : undefined}
       onEndReachedThreshold={0.5}
-      getItemType={() => "video"}
       ListFooterComponent={renderFooter}
     />
   );

@@ -135,7 +135,7 @@ export const videoFeedApi = {
     }
     
     return {
-      downloadUrl: video.videoUrl,
+      downloadUrl: typeof video.videoUrl === 'string' ? video.videoUrl : '',
     };
     
     // PRODUCTION: Uncomment when backend is ready

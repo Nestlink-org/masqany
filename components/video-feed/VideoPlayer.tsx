@@ -65,7 +65,7 @@ export function VideoPlayer({
   
   // Track taps for double-tap detection
   const lastTapRef = useRef<number>(0);
-  const tapTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const tapTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Animated values for play/pause icon
   const iconOpacity = useSharedValue(0);

@@ -453,4 +453,3 @@ export interface PropertyListResponse {
 // ---------------------------------------------------------------------------
 
 export type PropertyCategory = StayType;
-export { PropertyStatus };

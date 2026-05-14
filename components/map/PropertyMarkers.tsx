@@ -26,10 +26,11 @@ export function PropertyMarkers({ onMarkerPress }: PropertyMarkersProps) {
       try {
         const resolvedImage = Image.resolveAssetSource(houseIcon);
         if (resolvedImage) {
-          await Mapbox.Images.createImage("house-icon", resolvedImage.uri);
+          // Note: Icon registration is handled by SymbolLayer's iconImage prop
+          // No need to manually register with Mapbox.Images
         }
       } catch (error) {
-        console.error("Error registering icon:", error);
+        console.error("Error resolving icon:", error);
       }
     };
     registerIcon();
